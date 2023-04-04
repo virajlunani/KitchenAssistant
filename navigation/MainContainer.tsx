@@ -1,5 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// @ts-expect-error TS(2307): Cannot find module 'react-native-vector-icons/Ioni... Remove this comment to see the full error message
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 // Screens
@@ -8,12 +9,12 @@ import ProfileScreen from './screens/ProfileScreen';
 import Globals from '../Globals';
 
 //Screen names
-const chatName = "Chat";
-const profileName = "Profile";
+const chatName: string = "Chat";
+const profileName: string = "Profile";
 
 const Tab = createBottomTabNavigator();
 
-function MainContainer() {
+export default function MainContainer() {
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -30,7 +31,11 @@ function MainContainer() {
             },
             null
           ],
-          tabBarIcon: ({ focused, color, size }) => {
+          tabBarIcon: ({
+            focused,
+            color,
+            size
+          }: any) => {
             let iconName;
             let rn = route.name;
 
@@ -40,8 +45,6 @@ function MainContainer() {
             } else if (rn === profileName) {
               iconName = focused ? 'ios-person' : 'ios-person-outline';
             }
-
-            // You can return any component that you like here!
             return <Ionicons name={iconName} size={size} color={color} />;
           },
         })}>
@@ -53,5 +56,3 @@ function MainContainer() {
     </NavigationContainer>
   );
 }
-
-export default MainContainer;

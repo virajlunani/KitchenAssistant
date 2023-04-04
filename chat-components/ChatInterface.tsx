@@ -7,27 +7,33 @@ import { View,
          KeyboardAvoidingView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import GLOBALS from '../Globals';
+
+export interface Message {
+  text: string;
+  timestamp: Date;
+  isUserMessage: Boolean;
+}
  
 export default function ChatInterface() {
-  // inputValue String stores new message,  Messages List<String> all past messages
-  const [inputValue, setInputValue] = useState('');
-  const [messages, setMessages] = useState([]);
+  // inputValue - stores new message,  messages - all past messages
+  const [inputValue, setInputValue] = useState<string>('');
+  const [messages, setMessages] = useState<Message[]>([]);
 
-  const handleInputChange = (text) => {
+  const handleInputChange = (text: any) => {
     setInputValue(text);
   }
 
   const handleSubmit = () => {
-    const newMessage = {
+    const newMessage: Message = {
       text: inputValue,
       timestamp: new Date(),
       isUserMessage: true,
     };
     /** code to send request for response from agent (lambda function??) */
-    const agentResponse = {
-        text: 'agent response',
-        timestamp: new Date(),
-        isUserMessage: false,
+    const agentResponse: Message = {
+      text: 'agent response',
+      timestamp: new Date(),
+      isUserMessage: false,
     }
     setMessages([...messages, newMessage, agentResponse]);
     setInputValue('');
@@ -37,7 +43,7 @@ export default function ChatInterface() {
     <KeyboardAvoidingView style={styles.container} 
                           behavior="padding" 
                           keyboardVerticalOffset={100}>
-      <KeyboardAwareScrollView showsVerticalScrollIndicator="false">
+      <KeyboardAwareScrollView showsVerticalScrollIndicator={false} >
       <View style={styles.messagesContainer}>
         {/* create bubble for each message */}
         {messages.map((message, index) => (

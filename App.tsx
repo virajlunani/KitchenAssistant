@@ -1,5 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { registerRootComponent } from 'expo';
 import MainContainer from './navigation/MainContainer';
 
