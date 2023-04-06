@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { View } from 'react-native';
 import ChatInterface from '../../chat-components/ChatInterface';
 
 export default function ChatScreen({
