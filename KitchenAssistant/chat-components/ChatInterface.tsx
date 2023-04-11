@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import { View, 
          Text, 
          TextInput, 
@@ -7,6 +7,7 @@ import { View,
          KeyboardAvoidingView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import GLOBALS from '../Globals';
+import { ProfileContext } from '../profile-components/ProfileContext';
 
 export interface Message {
   text: string;
@@ -19,6 +20,16 @@ export default function ChatInterface() {
   const [inputValue, setInputValue] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([]);
 
+  const {
+    height,
+    weight,
+    age,
+    gender,
+    numPeople,
+    diets,
+    additionalInfo
+  } = useContext(ProfileContext)!;
+
   const handleInputChange = (text: any) => {
     setInputValue(text);
   }
@@ -29,14 +40,43 @@ export default function ChatInterface() {
       timestamp: new Date(),
       isUserMessage: true,
     };
-    /** code to send request for response from agent (lambda function??) */
-    const agentResponse: Message = {
-      text: 'agent response',
-      timestamp: new Date(),
-      isUserMessage: false,
-    }
-    setMessages([...messages, newMessage, agentResponse]);
     setInputValue('');
+    setMessages([...messages, newMessage])
+    /** code to send request to get agent response */
+    const requestBody = {
+      new_message: newMessage.text,
+      profile: {
+        height,
+        weight,
+        age,
+        gender,
+        numPeople,
+        diets,
+        additionalInfo
+      }
+    }
+    fetch(GLOBALS.AGENT_RESPONSE_SERVER.DEV, {
+      method: 'POST',
+      body: JSON.stringify(requestBody),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => {
+      return res.json()
+    })
+    .then((response) => {
+      console.log(response)
+      const agentResponse: Message = {
+        text: response.response,
+        timestamp: new Date(),
+        isUserMessage: false,
+      }
+      setMessages([...messages, newMessage, agentResponse]);
+    })
+    .catch(error => {
+      console.error(error)
+    })
   }
 
   return (

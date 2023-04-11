@@ -10,6 +10,9 @@ npm-debug.*
 *.orig.*
 web-build/
 
+env/
+__pycache__/
+constants.py
 # macOS
 .DS_Store
 

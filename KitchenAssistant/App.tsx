@@ -1,10 +1,13 @@
 import { StyleSheet } from 'react-native';
 import { registerRootComponent } from 'expo';
 import MainContainer from './navigation/MainContainer';
+import { ProfileProvider } from './profile-components/ProfileContext';
 
 export default function App() {
   return (
-    <MainContainer/>
+    <ProfileProvider>
+      <MainContainer/>
+    </ProfileProvider>
   );
 }
 

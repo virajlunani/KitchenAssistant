@@ -1,20 +1,29 @@
-import { View, Text, StyleSheet, Keyboard, TouchableWithoutFeedback } from 'react-native';
-import React, {useState} from 'react';
+import { View, StyleSheet, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import React, {useContext} from 'react';
 import { TextInput, ToggleButton, Chip } from 'react-native-paper';
 import ScrollPicker from 'react-native-wheel-scrollview-picker';
 import Globals from '../../Globals';
+import { ProfileContext } from '../../profile-components/ProfileContext';
 
 export default function ProfileScreen({
     navigation
 }: any) {
-    const [height, setHeight] = useState<string>("");
-    const [cmHeight, setCmHeight] = useState<string>("");
-    const [weight, setWeight] = useState<string>("");
-    const [age, setAge] = useState<string>("");
-    const [gender, setGender] = useState<string>("");
-    const [numPeople, setNumPeople] = useState<string>("");
-    const [diets, setDiets] = useState<string[]>([]);
-    const [additionalInfo, setAdditionalInfo] = useState<string>("");
+    const {
+        height, 
+        setHeight,
+        weight,
+        setWeight,
+        age,
+        setAge,
+        gender, 
+        setGender,
+        numPeople,
+        setNumPeople,
+        diets,
+        setDiets,
+        additionalInfo,
+        setAdditionalInfo
+    } = useContext(ProfileContext)!;
 
     const chips = [
         { id: 1, label: 'Vegatarian' },

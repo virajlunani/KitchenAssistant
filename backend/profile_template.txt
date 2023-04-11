@@ -1,0 +1,7 @@
+The user is $HEIGHT$ cm tall.
+The user weighs $WEIGHT$ kg.
+The user is $AGE$ years old.
+The user is a $GENDER$.
+The user is cooking for $NUMPEOPLE$ people.
+The user wants a diet that is $DIETS$.
+Here is some additional information about the users preferences: $ADDITIONALINFO$.
