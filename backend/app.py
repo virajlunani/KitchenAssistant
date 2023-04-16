@@ -36,8 +36,8 @@ def get_agent_response():
 
     if len(messages) > 10:
         messages = [messages[0]] + messages[-10:]
-    response = chat(messages)
-    # response = ChatPromptTemplate.from_messages([AIMessagePromptTemplate.from_template('placeholder')]).format_prompt().to_messages()[0]
+    # response = chat(messages)
+    response = ChatPromptTemplate.from_messages([AIMessagePromptTemplate.from_template('placeholder')]).format_prompt().to_messages()[0]
     messages.append(response)
     for message in messages: print(message)
 
