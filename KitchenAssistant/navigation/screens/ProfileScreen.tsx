@@ -74,25 +74,6 @@ export default function ProfileScreen({
                 onChangeText={setHeight}
                 keyboardType='numeric'
                 />
-            {/* <View style={styles.cmScrollInput}>
-                <ScrollPicker
-                    dataSource={cmHeights}
-                    selectedIndex={110}
-                    renderItem={(data, index, isSelected) => {
-                        return(
-                            <View>
-                                <Text>{data}</Text>
-                            </View>
-                        )
-                    }}
-                    onValueChange={cmHeight => {setCmHeight(cmHeight.toString())}}
-                    wrapperHeight={60}
-                    wrapperColor={Globals.COLOR.WHITE}
-                    itemHeight={40}
-                    highlightColor={Globals.COLOR.DARKERGREEN}
-                    highlightBorderWidth={2}
-                />
-            </View> */}
             <TextInput
                 label="Weight (kg)"
                 value={weight}
